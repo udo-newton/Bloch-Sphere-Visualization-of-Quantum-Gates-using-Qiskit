@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bloch Sphere Visualization</title>
+    <link rel="stylesheet" href="./styles.css?v=1">
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="sphere-panel" aria-labelledby="site-title">
+        <div class="title-row">
+          <div>
+            <p class="kicker">Single qubit gate lab</p>
+            <h1 id="site-title">Bloch Sphere Visualization</h1>
+          </div>
+          <div class="state-badge" aria-live="polite">
+            <span>Current ket</span>
+            <strong id="ketLabel">|0&gt;</strong>
+          </div>
+        </div>
+
+        <div class="visual-layout">
+          <div class="canvas-wrap">
+            <canvas id="blochCanvas" width="720" height="720" aria-label="Bloch sphere showing the current qubit state"></canvas>
+          </div>
+
+          <aside class="result-panel" aria-live="polite">
+            <h2>Result</h2>
+            <p id="gateResult">Ready at the default |0&gt; state. The vector points to the north pole.</p>
+            <dl>
+              <div>
+                <dt>Vector</dt>
+                <dd id="vectorReadout">(0.00, 0.00, 1.00)</dd>
+              </div>
+              <div>
+                <dt>State</dt>
+                <dd id="stateReadout">[1, 0]</dd>
+              </div>
+            </dl>
+          </aside>
+        </div>
+
+        <div class="phase-control" id="phaseControl">
+          <label for="phaseAngle">P gate angle</label>
+          <button class="angle-button" id="decreaseAngle" type="button" aria-label="Decrease P gate angle">-</button>
+          <input id="phaseAngle" type="range" min="0" max="360" value="90" step="5">
+          <button class="angle-button" id="increaseAngle" type="button" aria-label="Increase P gate angle">+</button>
+          <output id="phaseAngleLabel" for="phaseAngle">90 deg</output>
+        </div>
+
+        <div class="gate-row" aria-label="Quantum gate controls">
+          <div class="gate-help">
+            <button class="gate-button" data-gate="x" type="button">X</button>
+            <div class="tooltip" role="tooltip">Pauli-X flips |0&gt; to |1&gt; and |1&gt; to |0&gt;. On the sphere it reflects the vector around the X axis.</div>
+          </div>
+          <div class="gate-help">
+            <button class="gate-button" data-gate="h" type="button">H</button>
+            <div class="tooltip" role="tooltip">Hadamard turns a definite state into an equal superposition. It moves |0&gt; to the +X direction.</div>
+          </div>
+          <div class="gate-help">
+            <button class="gate-button" data-gate="z" type="button">Z</button>
+            <div class="tooltip" role="tooltip">Pauli-Z keeps |0&gt; unchanged and flips the phase of |1&gt;. It rotates the vector 180 degrees around Z.</div>
+          </div>
+          <div class="gate-help">
+            <button class="gate-button" data-gate="p" type="button">P</button>
+            <div class="tooltip" role="tooltip">Phase, or pi-style, gate adds a chosen angle to the |1&gt; part of the state. Pick the angle above before pressing P.</div>
+          </div>
+          <div class="gate-help">
+            <button class="gate-button" data-gate="i" type="button">I</button>
+            <div class="tooltip" role="tooltip">Identity leaves the qubit exactly as it is. It is useful as a no-change reference gate.</div>
+          </div>
+        </div>
+
+        <div class="reset-row">
+          <button class="reset-button" id="resetState" type="button">Reset</button>
+        </div>
+      </section>
+    </main>
+
+    <script src="./app.js?v=1"></script>
+  </body>
+</html>
